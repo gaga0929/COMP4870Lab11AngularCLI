@@ -1,16 +1,20 @@
+<div class="col-xs-6">
+<div class="form-group">
+  <label>First Name: </label><input [(ngModel)]="newCharacter.FirstName" placeholder="First Name" class="form-control">
+  <label>Last Name: </label><input [(ngModel)]="newCharacter.LastName" placeholder="Last Name" class="form-control" >
+  <label>Occupation: </label><input [(ngModel)]="newCharacter.Occupation" placeholder="Occupation" class="form-control" >
+  <label>Gender: </label><input [(ngModel)]="newCharacter.Gender" placeholder="M or F" class="form-control" >
+  <label>Picture: </label><input [(ngModel)]="newCharacter.Picture" placeholder="Picture URL" class="form-control">
+</div>
 
-<div>
-  <p><label>First Name: </label><input [(ngModel)]="newCharacter.FirstName" placeholder="First Name"></p>
-  <p><label>Last Name: </label><input [(ngModel)]="newCharacter.LastName" placeholder="Last Name"></p>
-  <p><label>Occupation: </label><input [(ngModel)]="newCharacter.Occupation" placeholder="Occupation"></p>
-  <p><label>Gender: </label><input [(ngModel)]="newCharacter.Gender" placeholder="M or F"></p>
-  <p><label>Picture: </label><input [(ngModel)]="newCharacter.Picture" placeholder="Picture URL"></p>
-  <button (click)="add(newCharacter);">
+  <button type="button" class="btn btn-primary" (click)="add(newCharacter);">
     Add
   </button>
-</div>
+
 <br/>
-<table *ngIf="characters" border="1">
+<br/>
+</div>
+<table *ngIf="characters" class="table table-hover">
   <thead>
     <tr>
       <th>Person ID</th>
@@ -22,13 +26,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let c of characters; let i=index;" (click)="onSelect(c)" [class.selected]="c === selected">
-      <td>{{c.PersonId}}</td>
+    <tr *ngFor="let c of characters; let i=index;" (click)="onSelect(c)" [class.selected]="c === selected" >
+      <td [routerLink]="['/detail', c.PersonId]" >{{c.PersonId}}</td>
       <td>{{c.FirstName}}</td>
       <td>{{c.LastName}}</td>
       <td>{{c.Occupation}}</td>
       <td>{{c.Gender}}</td>
-      <td><button class="delete" (click)="delete(c); $event.stopPropagation()">Delete</button></td>
+      <td><button class="btn btn-primary" (click)="delete(c); $event.stopPropagation()" >Delete</button></td>
     </tr>
   </tbody>
 </table>
